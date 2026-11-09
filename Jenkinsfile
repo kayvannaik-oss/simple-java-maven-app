@@ -3,7 +3,7 @@ pipeline {
 
     tools {
         // Must match the name you gave the Maven tool in Jenkins
-        maven 'maven-tools-3.10.0'
+        maven 'maven-3.10.0'
     }
 
     environment {
