@@ -5,9 +5,9 @@ pipeline {
     environment {
         DOCKER_CREDENTIALS_ID = 'dockerhub-id'
         DOCKER_HUB_USER       = 'kaydocker14'
-        IMAGE_NAME            = 'my-app'
+        IMAGE_NAME            = 'pipeline-repo'
         IMAGE_TAG             = "${env.BUILD_NUMBER}"
-        FULL_IMAGE            = "${DOCKER_HUB_USER}/${IMAGE_NAME}:${IMAGE_TAG}"
+        FULL_IMAGE            = "kaydocker143/${IMAGE_NAME}:${IMAGE_TAG}"
     }
 
     stages {
