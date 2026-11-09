@@ -7,7 +7,7 @@ pipeline {
         DOCKER_HUB_USER       = 'kaydocker143'
         IMAGE_NAME            = 'pipeline-repo'
         IMAGE_TAG             = "${env.BUILD_NUMBER}"
-        FULL_IMAGE            = "kaydocker143/${IMAGE_NAME}:${IMAGE_TAG}"
+        FULL_IMAGE            = "${DOCKER_HUB_USER}/${IMAGE_NAME}:${IMAGE_TAG}"
     }
 
     stages {
