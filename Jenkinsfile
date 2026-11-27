@@ -25,7 +25,7 @@ pipeline {
                 // 2. Commit and push
                 sh '''
                     git config user.email "kayvannaik9353@gmail.com"
-                    git config user.name "kayvan naik"
+                    git config user.name "kayvannaik-oss"
                     git add pom.xml
                     git commit -m "Bump version to 1.1 [skip ci]"
                     
