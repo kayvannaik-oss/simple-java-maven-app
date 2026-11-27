@@ -1,7 +1,7 @@
 pipeline {
     agent any
 
-     triggers {           // ← plural, not "trigger"
+    triggers {
         githubPush()
     }
 
@@ -9,7 +9,15 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building the application...'
-                // Example for later: sh 'docker build -t my-app:1.0 .'
+                // Example for later: sh 'mvn clean package -DskipTests'
+            }
+        }
+        
+        stage('Update POM Version') {
+            steps {
+                echo 'Updating POM version to 1.1...'
+                // Updates the version and removes the backup file in one step
+                sh 'mvn versions:set -DnewVersion=1.1 -DgenerateBackupPoms=false'
             }
         }
         
@@ -37,4 +45,3 @@ pipeline {
         }
     }
 }
-#test6
