@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     tools {
-        maven 'maven-tools' // Replace with your exact Maven tool name in Jenkins
+        maven 'maven-versions' // Replace with your exact Maven tool name in Jenkins
     }
 
     triggers {
