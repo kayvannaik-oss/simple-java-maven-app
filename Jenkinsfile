@@ -1,36 +1,40 @@
 pipeline {
     agent any
-    tools { maven 'maven-tools' }
 
-    triggers {
-        githubPush() // Added to enable automatic build on GitHub push
-    }
-
-    environment {
-        DOCKER_CREDENTIALS_ID = 'dockerhub-id'
-        DOCKER_HUB_USER       = 'kaydocker143'
-        IMAGE_NAME            = 'pipeline-repo'
-        IMAGE_TAG             = "${env.BUILD_NUMBER}"
-        FULL_IMAGE            = "${DOCKER_HUB_USER}/${IMAGE_NAME}:${IMAGE_TAG}"
+     triggers {           // ← plural, not "trigger"
+        githubPush()
     }
 
     stages {
-        stage('Checkout')         { steps { checkout scm } }
-        stage('Build with Maven') { steps { sh 'mvn clean package -DskipTests' } }
-        stage('Docker Build & Push') {
+        stage('Build') {
             steps {
-                script {
-                    def docker = load 'docker.groovy'
-                    docker.buildImage(env.FULL_IMAGE)
-                    docker.loginAndPush(env.DOCKER_CREDENTIALS_ID, env.FULL_IMAGE)
-                }
+                echo 'Building the application...'
+                // Example for later: sh 'docker build -t my-app:1.0 .'
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+                // Example for later: sh 'npm test' or sh 'mvn test'
+            }
+        }
+        
+        stage('Deploy') {
+            steps {
+                echo 'Deploying the application...'
+                // Example for later: sh 'docker push my-app:1.0'
             }
         }
     }
-
+    
     post {
-        success { echo "✅ Pushed ${env.FULL_IMAGE}" }
-        failure { echo "❌ Pipeline failed" }
+        success {
+            echo 'Pipeline completed successfully! 🎉'
+        }
+        failure {
+            echo 'Pipeline failed. ❌'
+        }
     }
 }
-#test2
+#test6
