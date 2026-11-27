@@ -1,10 +1,10 @@
 pipeline {
     agent any
-
-       tools {
-        maven 'maven-version' // This name must EXACTLY match the name you gave in Jenkins Global Tools
-    }
     
+    tools {
+        maven 'maven-tools' // Replace with your exact Maven tool name in Jenkins
+    }
+
     triggers {
         githubPush()
     }
@@ -13,29 +13,37 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building the application...'
-                // Example for later: sh 'mvn clean package -DskipTests'
             }
         }
         
-        stage('Update POM Version') {
+        stage('Update POM Version & Push') {
             steps {
-                echo 'Updating POM version to 1.1...version'
-                // Updates the version and removes the backup file in one step
+                echo 'Updating POM version to 1.1...'
+                // 1. Update version
                 sh 'mvn versions:set -DnewVersion=1.1 -DgenerateBackupPoms=false'
+                
+                // 2. Commit and push
+                sh '''
+                    git config user.email "kayvannaik9353@gmail.com"
+                    git config user.name "kayvan naik"
+                    git add pom.xml
+                    git commit -m "Bump version to 1.1 [skip ci]"
+                    
+                    # Note: You need to replace the URL below with your credentials or use Jenkins Credentials Binding
+                    git push origin HEAD:version-upgrade-1
+                '''
             }
         }
         
         stage('Test') {
             steps {
                 echo 'Running tests...'
-                // Example for later: sh 'npm test' or sh 'mvn test'
             }
         }
         
         stage('Deploy') {
             steps {
                 echo 'Deploying the application...'
-                // Example for later: sh 'docker push my-app:1.0'
             }
         }
     }
