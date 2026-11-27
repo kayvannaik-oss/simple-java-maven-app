@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+       tools {
+        maven 'maven-version' // This name must EXACTLY match the name you gave in Jenkins Global Tools
+    }
+    
     triggers {
         githubPush()
     }
