@@ -1,7 +1,7 @@
 pipeline {
     agent any
 
-     triggers {           // ← plural, not "trigger"
+     triggers {         
         githubPush()
     }
 
