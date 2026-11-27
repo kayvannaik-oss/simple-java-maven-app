@@ -1,8 +1,8 @@
 pipeline {
     agent any
 
-     triggers {         
-        githubPush()
+     triggers {
+        githubPush() // This must be plural "triggers"
     }
 
     stages {
