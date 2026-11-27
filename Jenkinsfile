@@ -15,7 +15,7 @@ pipeline {
         
         stage('Update POM Version') {
             steps {
-                echo 'Updating POM version to 1.1...'
+                echo 'Updating POM version to 1.1...version'
                 // Updates the version and removes the backup file in one step
                 sh 'mvn versions:set -DnewVersion=1.1 -DgenerateBackupPoms=false'
             }
