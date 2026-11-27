@@ -2,7 +2,7 @@ pipeline {
     agent any
 
      triggers {
-        githubPush() // This must be plural "triggers" 2
+        githubPush() // This must be plural "triggers" 3
     }
 
     stages {
