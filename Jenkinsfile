@@ -2,6 +2,10 @@ pipeline {
     agent any
     tools { maven 'maven-tools' }
 
+    triggers {
+        githubPush() // Added to enable automatic build on GitHub push
+    }
+
     environment {
         DOCKER_CREDENTIALS_ID = 'dockerhub-id'
         DOCKER_HUB_USER       = 'kaydocker143'
@@ -29,4 +33,3 @@ pipeline {
         failure { echo "❌ Pipeline failed" }
     }
 }
-#test3
